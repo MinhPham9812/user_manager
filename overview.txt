@@ -1,0 +1,34 @@
+Step 1: access authentication
+- Login
+- register
+- Logout
+- Forget password
+- Active account
+
+Step 2: Manager User
+- Authenticate user login
+- Add users
+- Edit users
+- Delete users
+- List users
+- Pagination
+- Search, filter
+
+01. Design database:
+
+-Table users:
++ id int primarykey
++ email varchar(100)
++ fullname varchar(100)
++ phone varchar(20)
++ password varchar(50)
++ forgotToken varchar(50)
++ activeToken varchar(50)
++ status tinyint
++ createAt datetime
++ updateAt datetime
+
+- Table loginToken:
++ id int primarykey
++ userId int foreignkey
++ token varchar(50)
