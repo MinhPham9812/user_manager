@@ -32,3 +32,4 @@ Step 2: Manager User
 + id int primarykey
 + userId int foreignkey
 + token varchar(50)
++ createAt datetime
