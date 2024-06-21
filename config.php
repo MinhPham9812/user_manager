@@ -10,3 +10,8 @@
     . '/user_manager'); // home address
 
     define('_WEB_HOST_TEMPLATES', _WEB_HOST_ROOT . '/templates');
+
+    //Setup path
+    define('_WEB_PATH_ROOT', __DIR__);
+    define('_WEB_PATH_TEMPLATES', _WEB_PATH_ROOT . '/templates');
+
