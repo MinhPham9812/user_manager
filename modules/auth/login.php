@@ -1,26 +1,31 @@
 <?php
     if(!defined('_INCODE')) die('Access Denied...');
     
-    require_once _WEB_PATH_TEMPLATES. '/layout/header.php';
+    layout('header-login');
 ?>
     <div class="row"> 
         <div class="col-6" style="margin: 20px auto" >
             <h3 class="text-center">Login</h3>
             <form action="" method="post">
-                <div class="form-group">
-                    <label for="">Email</label>
-                    <input type="email" class="form-control" placeholder="abc@example.com">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input id="email" class="form-control" placeholder="abc@example.com">
                 </div>
 
-                <div class="form-group">
-                    <label for="">Password</label>
-                    <input type="password" class="form-control">
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input id="password" class="form-control">
                 </div>
-
-                <button style="margin: 10px auto" type="submit" class="btn btn-primary btn-block">Enter</button>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Enter</button>
+                </div>
+                
+                <hr>
+                <p class="text-center"><a href="?module=auth&action=forgot">Forgot password</a></p>
+                <p class="text-center"><a href="?module=auth&anction=reigster">Sign Up</a></p>
             </form>
         </div>
     </div>
 <?php
-    require_once _WEB_PATH_TEMPLATES. '/layout/footer.php';
+    layout('footer-login');
 ?>
