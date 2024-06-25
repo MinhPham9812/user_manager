@@ -2,6 +2,7 @@
     session_start();
     require_once 'config.php';
     require_once 'includes/function.php';
+    require_once 'includes/connect.php';
 
     $module = _MODULE_DEFAULT;
     $action = _ACTION_DEFAULT;

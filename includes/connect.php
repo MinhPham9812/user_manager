@@ -1,10 +1,11 @@
 <?php
     if(!defined('_INCODE')) die('Access Denied...');
 
-    require 'config.php';
+    require_once __DIR__ . '/../config.php'; 
     try{
         $conn = new PDO("mysql:host="._HOST.";dbname="._DB, _USER, _PASSWORD);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }catch(PDOException $e){
-        echo "Error: " . $e->getMessage();
+        require_once 'modules/errors/database.php';
+        die();
     }
