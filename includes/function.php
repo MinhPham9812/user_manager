@@ -6,3 +6,4 @@
             require_once _WEB_PATH_TEMPLATES. '/layout/'. $layoutName .'.php';
         }
     }
+    
