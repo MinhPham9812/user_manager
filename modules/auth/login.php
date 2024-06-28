@@ -5,6 +5,9 @@
         'pageTitle' => 'Login'
     ];
     layout('header-login', $data);
+
+    //$send = sendMail('nhanm684@gmail.com','Test Email', 'Hello Minh');
+    //  if($send) echo "Sent Email";
 ?>
     <div class="row"> 
        <div class="col-6" style="margin: 20px auto" >
