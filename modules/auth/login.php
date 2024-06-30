@@ -8,6 +8,8 @@
 
     //$send = sendMail('nhanm684@gmail.com','Test Email', 'Hello Minh');
     //  if($send) echo "Sent Email";
+
+    
 ?>
     <div class="row"> 
        <div class="col-6" style="margin: 20px auto" >
@@ -15,12 +17,12 @@
             <form action="" method="post">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input id="email" class="form-control" placeholder="abc@example.com">
+                    <input id="email" class="form-control" type="email" name="email" placeholder="abc@example.com">
                 </div>
 
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input id="password" class="form-control">
+                    <input id="password" class="form-control" type="password" name="password">
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-primary">Login</button>
