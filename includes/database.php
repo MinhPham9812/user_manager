@@ -116,3 +116,10 @@
         }
         return firstRaw($sql); 
     }
+
+    function getRows($sql){
+        $statement = query($sql);
+        if(!empty($statement)){
+            return $statement->rowCount();
+        }
+    }

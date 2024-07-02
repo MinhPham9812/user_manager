@@ -141,4 +141,12 @@ require_once 'includes/phpmailer/Exception.php';
 
         return $checkNumber;
     }
+
+    function getMsg($msg, $type='success'){
+        if(!empty($msg)){
+            echo '<div class="alert alert-'.$type.'">';
+            echo $msg;
+            echo '</div>';
+        }
+    }
     
