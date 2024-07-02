@@ -11,23 +11,28 @@
             <h3 class="text-center text-uppercase">Register</h3>
             <form action="" method="post">
                 <div class="mb-3">
-                    <label for="fullname" class="form-label">Full Name</label>
-                    <input id="fullname" class="form-control">
+                    <label for="fullname" class="form-label">First Name</label>
+                    <input id="fullname" class="form-control" type="text" placeholder="Enter your first name">
+                </div>
+
+                <div class="mb-3">
+                    <label for="fullname" class="form-label">Last Name</label>
+                    <input id="fullname" class="form-control" type="text" placeholder="Enter your last name">
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input id="email" class="form-control" placeholder="abc@example.com">
+                    <input id="email" class="form-control" type="email" placeholder="Enter your email">
                 </div>
 
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input id="password" class="form-control">
+                    <input id="password" class="form-control" type="password" placeholder="Create a password">
                 </div>
 
                 <div class="mb-3">
                     <label for="c-password" class="form-label">Confirm Password</label>
-                    <input id="c-password" class="form-control">
+                    <input id="c-password" class="form-control" type="password" placeholder="Confirm your password">
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-primary">Sign Up</button>

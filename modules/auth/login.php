@@ -17,12 +17,12 @@
             <form action="" method="post">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input id="email" class="form-control" type="email" name="email" placeholder="abc@example.com">
+                    <input id="email" class="form-control" type="email" name="email" placeholder="Enter your email">
                 </div>
 
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input id="password" class="form-control" type="password" name="password">
+                    <input id="password" class="form-control" type="password" name="password" placeholder="Enter your password">
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-primary">Login</button>
