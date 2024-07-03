@@ -125,11 +125,13 @@ require_once 'includes/phpmailer/Exception.php';
         return $bodyArr;
     }
 
+    //check validate email
     function isEmail($email){
         $checkEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
         return $checkEmail;
     }
 
+    //check validate int
     function isNumberInt($number, $range = []){
         // $range = ['min_range' => 1, 'max_range' => 20]
         if(!empty($range)){
@@ -142,6 +144,7 @@ require_once 'includes/phpmailer/Exception.php';
         return $checkNumber;
     }
 
+    //create notice
     function getMsg($msg, $type='success'){
         if(!empty($msg)){
             echo '<div class="alert alert-'.$type.'">';
@@ -149,4 +152,21 @@ require_once 'includes/phpmailer/Exception.php';
             echo '</div>';
         }
     }
+
+    // redirect function
+    function redirect($path = 'index.php'){
+        header("Location: $path");
+        exit;
+    }
+
+    // notice errors
+    function form_error($fieldName, $errors, $beforeHtml ='', $afterHtml=''){
+        return (!empty($errors[$fieldName]))? $beforeHtml . 
+        reset($errors[$fieldName]) . $afterHtml :null;
+    }
     
+
+    //stores old data from form register
+    function oldData($fieldName, $oldData){
+        return (!empty($oldData[$fieldName]))?$oldData[$fieldName]:null;
+    }
