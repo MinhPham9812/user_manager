@@ -24,27 +24,28 @@
     }
 
     function insert($table, $dataInsert){
-        $keyArr = array_keys($dataInsert);
-        $fiedStr = implode(', ', $keyArr);
-        $valueStr = ':'.implode(', :', $keyArr);
+        $keyArr = array_keys($dataInsert); //get key of Array: 'email' => example@gmail ($keyArray = 'email')
+        $fiedStr = implode(', ', $keyArr); // email, firstname, lastname
+        $valueStr = ':'.implode(', :', $keyArr);// :email, :firstname, lastname
 
-        echo "<pre>";
-        print_r($dataInsert);
-        echo "</pre>";
+        // echo "<pre>";
+        // print_r($dataInsert);
+        // echo "</pre>";
 
-        echo $keyArr . "<br>";
-        echo $fiedStr . "<br>";
+        // echo $keyArr . "<br>"; 
+        // echo $fiedStr . "<br>";
+        // echo $valueStr;
 
         $sql = 'INSERT INTO ' . $table . '(' . $fiedStr . ') VALUES(' . $valueStr . ')';
-        echo $sql;
+        //echo $sql; // INSERT INTO users(email, firstname, lastname) VALUES(:email, :firstname, :lastname)
 
         return query($sql, $dataInsert);
     } 
 
     function update($table, $dataUpdate, $condition = ''){
-        echo "<pre>";
-        print_r($dataUpdate);
-        echo "</pre>";
+        // echo "<pre>";
+        // print_r($dataUpdate);
+        // echo "</pre>";
 
         $updateStr = '';
         foreach($dataUpdate as $key=>$value){

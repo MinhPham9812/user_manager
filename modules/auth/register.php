@@ -60,8 +60,46 @@
         //Check errors
         if(empty($errors)){
             // no error
-            setFlashData('msg', 'Validate successfully');
-            setFlashData('msg_type', 'success');
+            // setup information user
+            $activeToken = sha1(uniqid().time());
+            $dataInsert = [
+                'email' => $body['email'],
+                'firstname' => $body['firstname'],
+                'middlename' => $body['middlename'],
+                'lastname' => $body['lastname'],
+                'password' =>  password_hash($body['password'], PASSWORD_DEFAULT),
+                'activeToken' => $activeToken,
+                'createAt' => date('Y-m-d H:i:s') 
+            ];
+            //insert information user to database
+            $insertStatus = insert('users', $dataInsert);
+            if($insertStatus){
+                //Create link to active account
+                $linkActive = _WEB_HOST_ROOT.'/?module=auth&action=active&token='. $activeToken;
+                if(empty($body['middlename'])){
+                    $subject = $body['firstname'] . ' ' . $body['lastname'] . ' Please active your account';
+                }else{
+                    $subject = $body['firstname'] . ' ' . $body['middlename'] . ' ' .$body['lastname'] . ' Please active your account';
+                }
+                
+                $content = 'Hello ' . $body['firstname'] . '<br/>';
+                $content.= 'Please click link below to active your account: <br/>';
+                $content.=$linkActive . '<br>/';
+                $content.= 'Thank you!';
+
+                //Proceed to send mail
+                $sendStatus = sendMail($body['email'], $subject, $content);
+                if($sendStatus){
+                    setFlashData('msg', 'Successfully registered account. Please check your email to active account');
+                    setFlashData('msg_type', 'success');
+                }else{
+                    setFlashData('msg', 'The system is experiencing problems, please try again later');
+                    setFlashData('msg_type', 'danger');
+                }
+            }
+
+            
+
         }else{
             setFlashData('msg', 'Please check the data entered! ');
             setFlashData('msg_type', 'danger');
@@ -76,15 +114,16 @@
     $msgType = getFlashData('msg_type');
     $errors = getFlashData('errors');
     $oldData = getFlashData('oldData');
-    echo "<pre>";
-    print_r($oldData);
-    echo '</pre>';
+    // echo "<pre>";
+    // print_r($oldData);
+    // echo '</pre>';
 ?>
     <div class="row"> 
        <div class="col-6" style="margin: 20px auto" >
             <h3 class="text-center text-uppercase">Register</h3>
             
             <?php
+                //show notice
                 getMsg($msg, $msgType);
             ?>
             
@@ -103,8 +142,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="midlename" class="form-label">Midle Name</label>
-                    <input id="midlename" 
+                    <label for="middlename" class="form-label">Middle Name</label>
+                    <input id="middlename" 
                             class="form-control" 
                             name="midlename" 
                             type="text" 
