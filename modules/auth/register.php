@@ -57,6 +57,10 @@
             $errors['c_password']['match'] = 'Password must be same.';
         }
 
+        echo "<pre>";
+        print_r($body);
+        echo '</pre>';
+
         //Check errors
         if(empty($errors)){
             // no error
@@ -107,6 +111,7 @@
             setFlashData('oldData', $body);
             redirect('?module=auth&action=register'); //Reload the registration page
         }
+        
         
     }
  
