@@ -79,7 +79,6 @@
     //Get data from SQL statment
     function getRaw($sql){
         $statement = query($sql);
-        var_dump($statement);
 
         if(is_object($statement)){
             $dataFetch = $statement->fetchAll(PDO::FETCH_ASSOC);
