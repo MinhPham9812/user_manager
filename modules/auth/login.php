@@ -6,6 +6,12 @@
     ];
     layout('header-login', $data);
 
+    //check status login
+    if(isLogin()){
+        redirect('?module=users');
+    }
+
+    //handle login
     if(isPOST()){
         $body = getBody();
 
@@ -30,14 +36,48 @@
         //check password
         if(empty(trim($body['password']))){
             $errors['password']['required'] = 'Password is required.';
+        }else{
+            //check password match or not in Database
+            $password = $body['password'];
+            //get password from database
+            $userQuery = firstRaw("SELECT id, password FROM users WHERE email = '$email'");
+            if(!empty($userQuery)){
+                
+                $passwordHash = $userQuery['password'];
+                $userId = $userQuery['id'];
+                if(password_verify($password, $passwordHash)){
+                    //Create token login
+                    $tokenLogin = sha1(uniqid().time());
+
+                    //Insert data to the table: loginToken
+                    $dataToken =[
+                        'userID' => $userId,
+                        'token' => $tokenLogin,
+                        'createAt' => date('Y-m-d H:i:s')
+                    ];
+
+                    $insertTokenStatus = insert('loginToken', $dataToken);
+                    if($insertTokenStatus){
+                        // Save tokenLogin to the session
+                        setSession('loginToken', $tokenLogin);
+                        redirect('?module=users');
+                    }else{
+                        setFlashData('msg', 'System error, you cannot log in at this time.');
+                        setFlashData('msg_type', 'danger');
+                    }
+                }else{
+                    $errors['password']['match'] = 'Incorrect password';
+                }
+            }
         }
 
-        echo '<pre>';
-        print_r($errors); 
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r($errors); 
+        // echo '</pre>';
 
         if(empty($errors)){
-
+            setFlashData('msg', 'Logged in successfully');
+            setFlashData('msg_type', 'success');
         }else{
             setFlashData('msg', 'Please check the data entered! ');
             setFlashData('msg_type', 'danger');

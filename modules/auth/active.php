@@ -30,10 +30,10 @@
         redirect('?module=auth&action=login');
             
         }else{
-            getMsg('The link does not exist or has expired.');
+            getMsg('The link does not exist or has expired.', 'danger');
         }
     }else{
-        getMsg('The link does not exist or has expired.');
+        getMsg('The link does not exist or has expired.', 'danger');
     }
 
     echo "</div>";

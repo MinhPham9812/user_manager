@@ -170,3 +170,20 @@ require_once 'includes/phpmailer/Exception.php';
     function oldData($fieldName, $oldData){
         return (!empty($oldData[$fieldName]))?$oldData[$fieldName]:null;
     }
+
+    //Status login
+    function isLogin(){
+        $checkLogin = false;
+        if(getSession('loginToken')){
+            $tokenLogin = getSession('loginToken');
+
+            $queryToken = firstRaw("SELECT userID FROM loginToken WHERE token = '$tokenLogin'");
+            if(!empty($queryToken)){
+                $checkLogin = true;
+            }else{
+                removeSession('loginToken');
+            }
+        }
+
+        return $checkLogin;
+    }
