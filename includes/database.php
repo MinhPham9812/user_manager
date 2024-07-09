@@ -52,7 +52,7 @@
             $updateStr.=$key.'=:'.$key.', ';
         }
         $updateStr = rtrim($updateStr, ', ');
-        echo $updateStr;
+        //echo $updateStr;
 
         if(!empty($condition)){
             $sql = 'UPDATE ' .$table.' SET ' .$updateStr . ' WHERE ' . $condition;
@@ -60,7 +60,7 @@
             $sql = 'UPDATE ' .$table.' SET ' .$updateStr;
         }
         
-        echo $sql;
+        //echo $sql;
         return query($sql, $dataUpdate);
     }
 

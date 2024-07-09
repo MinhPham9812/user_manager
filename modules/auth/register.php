@@ -57,9 +57,6 @@
             $errors['c_password']['match'] = 'Password must be same.';
         }
 
-        echo "<pre>";
-        print_r($body);
-        echo '</pre>';
 
         //Check errors
         if(empty($errors)){
@@ -196,8 +193,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="c-password" class="form-label">Confirm Password</label>
-                    <input id="c-password" 
+                    <label for="c_password" class="form-label">Confirm Password</label>
+                    <input id="c_password" 
                             class="form-control" 
                             name="c_password" 
                             type="password" 
@@ -214,7 +211,7 @@
                 
                 <hr>
                 
-                <p class="text-center"><a href="?module=auth&action=login">Sign In</a></p>
+                <p class="text-center"><a href="?module=auth&action=login">Login</a></p>
             </form>
         </div>
     </div>

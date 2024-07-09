@@ -153,10 +153,10 @@ require_once 'includes/phpmailer/Exception.php';
         }
     }
 
-    // redirect function
+    // redirect page
     function redirect($path = 'index.php'){
         header("Location: $path");
-        exit;
+        exit();
     }
 
     // notice errors
