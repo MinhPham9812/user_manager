@@ -7,9 +7,9 @@
     layout('header-login', $data);
 
     //check status login
-    // if(isLogin()){
-    //     redirect('?module=users');
-    // }
+    if(isLogin()){
+        redirect('?module=users');
+    }
 
     //handle login
     if(isPOST()){
