@@ -44,7 +44,7 @@
         <hr>
         <h3>User Manager</h3>
         <p>
-            <a href="#" class="btn btn-success btn-sm">Add user <i class="fa fa-plus"></i></a>
+            <a href="?module=users&action=add" class="btn btn-success btn-sm">Add user <i class="fa fa-plus"></i></a>
         </p>
         <table class="table table-bordered">
             <thead>

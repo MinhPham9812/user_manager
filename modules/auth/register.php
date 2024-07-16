@@ -93,6 +93,7 @@
                 if($sendStatus){
                     setFlashData('msg', 'Successfully registered account. Please check your email to active account');
                     setFlashData('msg_type', 'success');
+                    redirect('?module=auth&action=login');
                 }else{
                     setFlashData('msg', 'The system is experiencing problems, please try again later');
                     setFlashData('msg_type', 'danger');
@@ -149,7 +150,7 @@
                             class="form-control" 
                             name="midlename" 
                             type="text" 
-                            placeholder="Enter your midle name">
+                            placeholder="Enter your middle name">
                 </div>
 
                 <div class="mb-3">

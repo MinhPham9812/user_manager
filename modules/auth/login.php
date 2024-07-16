@@ -10,7 +10,7 @@
     if(isLogin()){
         redirect('?module=users');
     }
-
+    
     //handle login
     if(isPOST()){
         $body = getBody();
