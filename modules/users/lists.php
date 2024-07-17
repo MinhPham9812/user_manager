@@ -5,10 +5,49 @@
         'pageTitle' => 'User Manager'
     ];
     layout('header', $data);
+    //Data filtering processing
+    $filter = '';
+    if(isGET()){
+        $body = getBody();
+
+        //filter status (option has value = 0, so $status = empty)
+        if(!empty($body['status'])){
+            $status = $body['status'];
+
+            //check status
+            if($status == 2){
+                $statusSQL = 0;
+            }else{
+                $statusSQL = $status;
+            }
+
+
+            if(!empty($filter) && strpos($filter, 'WHERE') >=0){
+                $operator = 'AND';
+            }else{
+                $operator = 'WHERE';
+            }
+
+            $filter.= "WHERE status=$statusSQL";
+        }
+
+        //filter keywords
+        if(!empty($body['keywords'])){
+            $keyword = $body['keywords'];
+
+            if(!empty($filter) && strpos($filter, 'WHERE') >=0){
+                $operator = 'AND';
+            }else{
+                $operator = 'WHERE';
+            }
+
+            $filter.= " $operator (firstname LIKE '%$keyword%' OR lastname LIKE '%$keyword%' OR middlename LIKE '%$keyword%') ";
+        }
+    }
 
     //Handle pagination
-    // Count user
-    $allUserNum = getRows("SELECT * FROM users");
+    //Count user
+    $allUserNum = getRows("SELECT * FROM users $filter");
     
     //1.Identify records on a page
     $perPage = 3; //Each page has 3 records
@@ -37,8 +76,18 @@
     $offset = ($page-1)*3;
 
     //Get data from database
-    $listUser = getRaw("SELECT * FROM users ORDER BY createAt LIMIT $offset, $perPage");
+    $listUser = getRaw("SELECT * FROM users $filter ORDER BY createAt LIMIT $offset, $perPage");
     
+
+    //Handles search query strings with pagination
+    $queryString = null;
+    if(!empty($_SERVER['QUERY_STRING'])){
+        $queryString = $_SERVER['QUERY_STRING'];
+        $queryString = str_replace('module=users', '', $queryString);
+        $queryString = str_replace('&page='.$page, '', $queryString);
+        $queryString = trim($queryString, '&');
+        $queryString = '&'.$queryString;
+    }
 ?>
     <div class="container">
         <hr>
@@ -46,6 +95,27 @@
         <p>
             <a href="?module=users&action=add" class="btn btn-success btn-sm">Add user <i class="fa fa-plus"></i></a>
         </p>
+        <form action="" method="get">
+            <div class="row">
+                <div class="col-3">
+                    <div class="form-group">
+                        <select name="status" class="form-control">
+                            <option value="0">Select status</option>
+                            <option value="1" <?php echo (!empty($status) && $status==1)?'selected':false; ?>>Activated</option>
+                            <option value="2" <?php echo (!empty($status) && $status==2)?'selected':false; ?>>Not Activated</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <input type="search" class="form-control" name="keywords" placeholder="search keywords..." 
+                    value="<?php echo (!empty($keyword))?$keyword:false; ?>">
+                </div>    
+                <div class="col-3 d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+            <input type="hidden" name="module" value="users">
+        </form>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -87,7 +157,7 @@
                 <?php
                     $prevPage = $page - 1;
                     if($page > 1){
-                       echo  '<li class="page-item"><a class="page-link" href=" '. _WEB_HOST_ROOT.'?module=users&page='.$prevPage .'">Previous</a></li>';
+                       echo  '<li class="page-item"><a class="page-link" href=" '. _WEB_HOST_ROOT.'?module=users'.$queryString.'&page='.$prevPage .'">Previous</a></li>';
                     }
                     
                 ?>
@@ -102,12 +172,12 @@
                     $end = $maxPage;
                 }
                 for($i=$begin; $i<=$end; $i++){ ?>
-                <li class="page-item <?php echo ($i==$page)?'active':false; ?>"><a class="page-link" href="<?php echo _WEB_HOST_ROOT.'?module=users&page='.$i; ?>"><?php echo $i; ?></a></li>
+                <li class="page-item <?php echo ($i==$page)?'active':false; ?>"><a class="page-link" href="<?php echo _WEB_HOST_ROOT.'?module=users'.$queryString.'&page='.$i; ?>"><?php echo $i; ?></a></li>
                 <?php }; ?>    
                 <?php
                     $nextPage = $page + 1;
                     if($page < $maxPage){
-                        echo '<li class="page-item"><a class="page-link" href="'. _WEB_HOST_ROOT.'?module=users&page='.$nextPage .'">Next</a></li>';
+                        echo '<li class="page-item"><a class="page-link" href="'. _WEB_HOST_ROOT.'?module=users'.$queryString.'&page='.$nextPage .'">Next</a></li>';
                     }
                 ?>
                 
