@@ -92,7 +92,7 @@
             redirect('?module=users&action=add'); //Reload the add page
         }
         
-        
+         
     }
  
     $msg = getFlashData('msg');
