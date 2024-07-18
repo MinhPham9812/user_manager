@@ -83,7 +83,7 @@
     $errors = getFlashData('errors');
     $oldData = getFlashData('oldData');
     // echo "<pre>";
-    // print_r($oldData);
+    // print_r($userQuery);
     // echo '</pre>';
 ?>
     <div class="row"> 
@@ -102,7 +102,7 @@
                             class="form-control" 
                             name="firstname" type="text" 
                             placeholder="Enter your first name"
-                            value="<?php echo oldData('firstname', $oldData); //keep value correct ?>">
+                            value="<?php echo $userQuery['firstname']; ?>">
                 <?php
                     //show errors
                     echo form_error('firstname', $errors, '<span class="errors">', '</span>') ; 
@@ -113,9 +113,10 @@
                     <label for="middlename" class="form-label">Middle Name</label>
                     <input id="middlename" 
                             class="form-control" 
-                            name="midlename" 
+                            name="middlename" 
                             type="text" 
-                            placeholder="Enter your middle name">
+                            placeholder="Enter your middle name"
+                            value="<?php echo $userQuery['middlename']; ?>">
                 </div>
 
                 <div class="mb-3">
@@ -124,7 +125,7 @@
                             class="form-control" 
                             name="lastname" type="text" 
                             placeholder="Enter your last name"
-                            value="<?php echo oldData('lastname', $oldData); //keep value correct ?>">
+                            value="<?php echo $userQuery['lastname']; ?>">
                 <?php
                     //show errors
                     echo form_error('lastname', $errors, '<span class="errors">', '</span>'); 
@@ -137,7 +138,7 @@
                             class="form-control" 
                             name="email" type="text" 
                             placeholder="Enter your email"
-                            value="<?php echo oldData('email', $oldData); //keep value correct ?>">
+                            value="<?php echo $userQuery['email']; ?>">
                 <?php
                     //show errors
                     echo form_error('email', $errors, '<span class="errors">', '</span>') ; 
