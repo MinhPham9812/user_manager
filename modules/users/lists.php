@@ -88,6 +88,10 @@
         $queryString = trim($queryString, '&');
         $queryString = '&'.$queryString;
     }
+
+    // edit notice
+    $msg = getFlashData('msg');
+    $msgType = getFlashData('msg_type');
 ?>
     <div class="container">
         <hr>
@@ -116,6 +120,8 @@
             </div>
             <input type="hidden" name="module" value="users">
         </form>
+        <!-- Notice error -->
+        <?php getMsg($msg, $msgType) ?>
         <table class="table table-bordered">
             <thead>
                 <tr>
