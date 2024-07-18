@@ -140,8 +140,8 @@
                     <td><?php echo $item['email']; ?></td>
                     <td><?php echo $item['status']==1?'<button type="button" class="btn btn-success btn-sm">Activated</button>'
                               : '<button type="button" class="btn btn-warning btn-sm">Not Activated</button>'; ?></td>
-                    <td><a href="#" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i></a></td>
-                    <td><a href="#" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a></td>
+                    <td><a href="?module=users&action=edit&id=<?php echo $item['id']; ?>" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i></a></td>
+                    <td><a href="?module=users&action=delete&id=<?php echo $item['id']; ?>" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a></td>
                 </tr>
                 <?php endforeach; else: ?>
                 <tr>

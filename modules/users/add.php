@@ -4,7 +4,7 @@
     $data = [
         'pageTitle' => 'Add user'
     ];
-    layout('header-login', $data);
+    layout('header', $data);
 
     if(isPOST()){
         $body = getBody(); //get all data from form
@@ -161,7 +161,7 @@
                 ?>
                 </div>
                 <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary">Add Users</button>
+                    <button type="submit" class="btn btn-primary">Add User</button>
                 </div>
             </form>
         </div>
