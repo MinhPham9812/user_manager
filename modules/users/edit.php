@@ -54,7 +54,7 @@
                         'firstname' => $body['firstname'],
                         'middlename' => $body['middlename'],
                         'lastname' => $body['lastname'],
-                        'status' => 1,
+                        'status' => $body['status'],
                         'updateAt' => date('Y-m-d H:i:s') 
                     ];
                     //insert information user to database
@@ -142,6 +142,15 @@
                     //show errors
                     echo form_error('email', $errors, '<span class="errors">', '</span>') ; 
                 ?>
+                </div>
+
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    <select id="status" name="status" class="form-control">
+                        <option value="0">Select status</option>
+                        <option value="1" <?php echo (!empty($status) && $status==1)?'selected':false; ?>>Activated</option>
+                        <option value="2" <?php echo (!empty($status) && $status==2)?'selected':false; ?>>Not Activated</option>
+                    </select>
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-primary">Save changes</button>
